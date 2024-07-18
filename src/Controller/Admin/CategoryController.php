@@ -3,10 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -45,13 +47,21 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/update/{id}', name: 'update')]
-    public function update(Category $category): Response
+    public function update(Category $category, Request $request): Response
     {
-        $category;
-        $category->setName('modification');
+        $form = $this->createForm(CategoryType::class, $category);
 
-        $this->em->flush();
-        return $this->render('admin/category/update.html.twig');
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->em->flush();
+            $this->redirectToRoute('admin_category_index');
+        }
+
+        return $this->render('admin/category/update.html.twig',[
+            'formCategory' => $form
+        ]);
     }
 
     #[Route('/delete/{id}', name: 'delete')]

@@ -5,4 +5,14 @@
 
 {% block body %}
 <h2>Update</h2>
+
+{# {{ form(formCategory)}} #}
+
+
+{{ form_start(formCategory)}}
+    {{ form_rest(formCategory)}}
+    <input type="submit" value="Mettre à jour">
+{{form_end(formCategory)}}
+
+
 {% endblock %}
