@@ -19,12 +19,7 @@ class CategoryType extends AbstractType
                 'empty_data' => ''
             ])
             ->add('description')
-            ->add('createAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updateAt', null, [
-                'widget' => 'single_text',
-            ])
+
             // ->add('creer', SubmitType::class)
         ;
     }

@@ -4,15 +4,14 @@
 {% endblock %}
 
 {% block body %}
-	<pre>
-    {{ dump(categories) }}
-</pre>
 
-	<table>
+
+	<table class="table table-striped">
 		{% for category in categories %}
 			<tr>
 				<td>{{category.name}}</td>
-				<td>{{category.descritpion}}</td>
+				<td>{{category.description}}</td>
+				<td>{{category.createAt|date('d m Y')}}</td>
 			</tr>
 		{% endfor %}
 	</table>

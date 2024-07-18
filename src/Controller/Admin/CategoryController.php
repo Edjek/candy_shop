@@ -33,17 +33,25 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/create', name: 'create')]
-    public function create(): Response
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
-        $category = new Category();
-        $category->setName('test')
-            ->setDescription('test')
-            ->setCreateAt(new DateTimeImmutable());
+        $categorie = new Category();
+        $form = $this->createForm(CategoryType::class, $categorie);
+        $form->handleRequest($request);
 
-        $this->em->persist($category);
-        $this->em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $categorie->setCreateAt(new DateTimeImmutable());
+            $em->persist($categorie);
+            $em->flush();
 
-        return $this->render('admin/category/create.html.twig');
+            $this->addFlash('success', 'Une nouvelle categorie a bien été créé!');
+
+            return $this->redirectToRoute('admin_category_index');
+        }
+
+        return $this->render('admin/category/create.html.twig', [
+            'formCategory' => $form
+        ]);
     }
 
     #[Route('/update/{id}', name: 'update')]
@@ -53,13 +61,14 @@ class CategoryController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category->setUpdateAt(new DateTimeImmutable());
+
             $this->em->flush();
-            $this->redirectToRoute('admin_category_index');
+            return $this->redirectToRoute('admin_category_index');
         }
 
-        return $this->render('admin/category/update.html.twig',[
+        return $this->render('admin/category/update.html.twig', [
             'formCategory' => $form
         ]);
     }
