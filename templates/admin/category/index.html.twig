@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!
+{% endblock %}
+
+{% block body %}
+	<pre>
+    {{ dump(categories) }}
+</pre>
+
+	<table>
+		{% for category in categories %}
+			<tr>
+				<td>{{category.name}}</td>
+				<td>{{category.descritpion}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
