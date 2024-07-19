@@ -27,4 +27,4 @@ Dans cet exercice, vous allez créer un formulaire de contact dans une applicati
 1. Implémentez le `ContactController` en suivant les instructions.
 2. Créez le DTO `ContactDTO` avec les contraintes de validation nécessaires.
 3. Créez le formulaire `ContactType` pour gérer l'email et le message.
-4. Créez les templates Twig pour afficher le formulaire et la page de confirmation.
+4. Créez le template Twig pour afficher le formulaire.
