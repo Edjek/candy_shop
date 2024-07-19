@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CandyRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CandyRepository::class)]
 class Candy
@@ -14,7 +15,14 @@ class Candy
     #[ORM\Column]
     private ?int $id = null;
 
+    //  les champs ne doivent pas etre vide avant l'insertion en base de données
     #[ORM\Column(length: 255)]
+    // #[Assert\Length(min: 10, minMessage: 'La taille minimum pour le champ XXX est de XXX caractères')]
+    // #[Assert\NotBlank(message: 'Le champs {{ label }} ne peut pas etre vide')]
+    #[Assert\Sequentially([
+        new Assert\NotBlank(message: 'Le champs {{ label }} ne peut pas etre vide'),
+        new Assert\Length(min: 10, minMessage: 'La taille minimum pour le champ {{ label }} est de {{ limit }} caractères')
+    ])]
     private string $name = '';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

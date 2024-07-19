@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 #[Route('/admin/article', 'admin_article_')]
 class CandyController extends AbstractController
@@ -36,8 +37,10 @@ class CandyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $candy->setCreateAt(new DateTimeImmutable());
 
-            // Google est mon ami de créér un slug dans symfony
-            // $candy->setSlug('coucou');
+            $slug = strtolower($candy->getName());
+            $slugger = new AsciiSlugger();
+            $slug = $slugger->slug($slug);
+            $candy->setSlug($slug);
 
             $em->persist($candy);
             $em->flush();
@@ -54,7 +57,7 @@ class CandyController extends AbstractController
     #[Route('/update/{id}', name: 'update', requirements: ['id' => Requirement::DIGITS])]
     public function update(EntityManagerInterface $em, Candy $candy, Request $request): Response
     {
-        $form = $this->createForm(CandyType::class, $candy );
+        $form = $this->createForm(CandyType::class, $candy);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
