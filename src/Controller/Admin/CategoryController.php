@@ -32,7 +32,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'create')]
+    #[Route('/create', name: 'create', methods: ['POST','GET'])]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $categorie = new Category();
@@ -45,6 +45,7 @@ class CategoryController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Une nouvelle categorie a bien été créé!');
+            $this->addFlash('success', 'un autre message');
 
             return $this->redirectToRoute('admin_category_index');
         }

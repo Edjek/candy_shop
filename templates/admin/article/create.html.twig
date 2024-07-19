@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Hello ArticleController!
+{% endblock %}
 
 {% block body %}
-<h1>create</h1>
+	<h1>create</h1>
+
+	<div class="w-75 my-3 mx-auto">
+		{{ form_start(form) }}
+		{{ form_rest(form)}}
+		<input type="submit" value="Créer">
+		{{ form_end(form) }}
+	</div>
 {% endblock %}

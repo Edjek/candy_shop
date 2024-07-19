@@ -1,7 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Hello ArticleController!
+{% endblock %}
 
 {% block body %}
+	<main>
+		<h1>La liste des bonbons</h1>
+		<table class="table tble-striped">
+			<tr>
+				<th>Nom</th>
+				<th>Description</th>
+				<th>Slug</th>
+				<th>Modifier</th>
+			</tr>
+			{% for candy in candies %}
 
+				<tr>
+					<td>{{ candy.name }}</td>
+					<td>{{ candy.description }}</td>
+					<td>{{ candy.slug}}</td>
+					<td>
+						<a href={{ path('admin_article_update', { id: candy.id})}} class="btn btn-primary">Modifier</a>
+					</td>
+				</tr>
+
+			{% endfor %}
+		</table>
+	</main>
 {% endblock %}
