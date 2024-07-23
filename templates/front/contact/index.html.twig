@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactControler!
+{% endblock %}
+
+{% block body %}
+	<main>
+		<h1>Contact</h1>
+
+		{{ form_start(contact_form) }}
+
+		{{ form_rest(contact_form)}}
+
+		<input type="submit" value="Envoyer" class="btn btn-primary">
+		{{ form_end(contact_form) }}
+	</main>
+{% endblock %}

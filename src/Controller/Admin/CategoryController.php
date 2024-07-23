@@ -40,7 +40,7 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categorie->setCreateAt(new DateTimeImmutable());
+            // $categorie->setCreateAt(new DateTimeImmutable());
             $em->persist($categorie);
             $em->flush();
 
@@ -63,7 +63,7 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category->setUpdateAt(new DateTimeImmutable());
+            // $category->setUpdateAt(new DateTimeImmutable());
 
             $this->em->flush();
             return $this->redirectToRoute('admin_category_index');

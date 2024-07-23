@@ -2,7 +2,7 @@
 
 ## Objectif
 
-Dans cet exercice, vous allez créer un formulaire de contact dans une application Symfony. Le formulaire doit permettre de saisir un email et un message. Une fois soumis, le formulaire doit valider les données et afficher une page de confirmation.
+Dans cet exercice, vous allez créer un formulaire de contact dans une application Symfony. Le formulaire doit permettre de saisir un nom, un email et un message. Une fois soumis, le formulaire doit valider les données et afficher une page de confirmation.
 
 ## Étapes à suivre
 
